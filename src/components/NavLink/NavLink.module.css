@@ -1,0 +1,25 @@
+li {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+.link {
+  color: rgb(33, 42, 33);
+  font-size: var(--font-medium);
+  font-weight: 700;
+  text-transform: uppercase;
+  transition-property: color, background-color, transform;
+  transition-duration: 0.2s;
+  transition-timing-function: var(--animation-cubicBezier);
+  transform: scale(0.9);
+}
+
+.active {
+  composes: link;
+  color: rgb(146, 24, 58);
+  padding: 6px 12px;
+  border-radius: 4px;
+
+  transform: scale(1);
+  pointer-events: none;
+}

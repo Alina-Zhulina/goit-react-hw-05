@@ -1,32 +1,37 @@
 import "./App.css";
-import { Toaster } from "react-hot-toast";
-import { Routes, Route, Link } from "react-router-dom";
-import HomePage from "./pages/HomePage/HomePage";
-// import MoviesPage from "path/to/MoviesPage";
-// import MovieDetailsPage from "path/to/MovieDetailsPage";
-// import MovieCast from "path/to/MovieCast";
-// import MovieReviews from "path/to/MovieReviews";
-// import NotFoundPage from "path/to/NotFoundPage";
+import { Navigate, Route, Routes } from "react-router-dom";
+
+import { lazy, Suspense } from "react";
+import Navigation from "./components/Navigation/Navigation";
+import Loader from "./components/Loader/Loader";
+
+const HomePage = lazy(() => import("./pages/HomePage/HomePage"));
+const MoviesPage = lazy(() => import("./pages/MoviesPage/MoviesPage"));
+const MovieDetailsPage = lazy(() =>
+  import("./pages/MovieDetailsPage/MovieDetailsPage")
+);
+const MovieCast = lazy(() => import("./components/MovieCast/MovieCast"));
+const MovieReviews = lazy(() =>
+  import("./components/MovieReviews/MovieReviews")
+);
+// const NotFoundPage = lazy(() => import("./pages/NotFoundPage/NotFoundPage"));
 
 function App() {
   return (
-    <div>
-      <nav>
-        <Link to="/">Home</Link>
-        <Link to="/movies">Movies</Link>
-      </nav>
-
-      <Routes>
-        <Route path="/" element={<HomePage />} />
-        {/* <Route path="/movies" element={<MoviesPage />} />
-        <Route path="/movies/:movieId" element={<MovieDetailsPage />}>
-          <Route path="cast" element={<MovieCast />} />
-          <Route path="reviews" element={<MovieReviews />} />
-        </Route>
-        <Route path="*" element={<NotFoundPage />} /> */}
-      </Routes>
-      <Toaster />
-    </div>
+    <>
+      <Navigation />
+      <Suspense fallback={<Loader />}>
+        <Routes>
+          <Route path="/" element={<HomePage />} />
+          <Route path="/movies" element={<MoviesPage />} />
+          <Route path="/movies/:movieId" element={<MovieDetailsPage />}>
+            <Route path="cast" element={<MovieCast />} />
+            <Route path="reviews" element={<MovieReviews />} />
+          </Route>
+          {/* <Route path="*" element={<NotFoundPage />} /> */}
+        </Routes>
+      </Suspense>
+    </>
   );
 }
 

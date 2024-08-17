@@ -1,0 +1,52 @@
+.wrapper {
+  display: flex;
+  gap: 20px;
+  align-items: flex-start;
+}
+
+.poster {
+  flex-shrink: 0;
+}
+
+.img {
+  width: 200px;
+  border-radius: 10px;
+}
+
+.details {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+
+.movieTitle {
+  font-size: 28px;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 20px;
+  text-transform: uppercase;
+}
+
+.infoList {
+  list-style: none;
+  text-align: left;
+  gap: 20px;
+}
+
+.overview,
+.genres {
+  font-size: 16px;
+  line-height: 1.5;
+  color: #555;
+}
+
+.overview p,
+.genres p {
+  font-weight: normal;
+}
+
+.overview b,
+.genres b {
+  font-weight: bold;
+  color: #000;
+}

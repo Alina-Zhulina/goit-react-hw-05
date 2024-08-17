@@ -1,0 +1,29 @@
+.sideNav {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.navList {
+  list-style: none;
+  padding: 0;
+}
+
+.navItem {
+  margin-bottom: 10px;
+}
+
+.navItem a {
+  text-decoration: none;
+  color: #007bff;
+  font-weight: bold;
+}
+
+.navItem a:hover {
+  text-decoration: underline;
+}
+
+.movieInfo {
+  flex: 3;
+}
