@@ -6,7 +6,6 @@ const MoviesList = ({ movies }) => {
 
   return (
     <div className={css.movieContainer}>
-      <h1 className={css.trends}>Trending Today</h1>
       <ul className={css.moviesList}>
         {movies.map(({ id, title, poster_path }) => (
           <li key={id} className={css.movieItem}>

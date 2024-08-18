@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import Loader from "../../components/Loader/Loader";
 import { getTrendingMovies } from "../../service/moviesApi";
 import MoviesList from "../../components/MoviesList/MoviesList";
+import css from "./HomePage.module.css";
 
 const HomePage = () => {
   const [movies, setMovies] = useState([]);
@@ -28,6 +29,7 @@ const HomePage = () => {
     <div>
       {loader && <Loader />}
       {error && <p>Something went wrong: {error.message}</p>}
+      <h1 className={css.trends}>Trending Today</h1>
       <MoviesList movies={movies} />
     </div>
   );

@@ -5,6 +5,7 @@ import Loader from "../../components/Loader/Loader";
 import MovieInfo from "../../components/MovieInfo/MovieInfo";
 import GoBackBtn from "../../components/GoBackBtn/GoBackBtn";
 import css from "./MovieDetailsPage.module.css";
+
 const MovieDetailsPage = () => {
   const { movieId } = useParams();
   const [movie, setMovie] = useState(null);

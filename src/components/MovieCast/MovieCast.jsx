@@ -32,15 +32,17 @@ const MovieCast = () => {
       <ul className={css.castList}>
         {cast.map((member) => (
           <li key={member.id} className={css.castItem}>
-            <img
-              className={css.castPhoto}
-              src={
-                member.profile_path
-                  ? `https://image.tmdb.org/t/p/w200${member.profile_path}`
-                  : "/path/to/placeholder.jpg"
-              }
-              alt={member.name}
-            />
+            {member.profile_path ? (
+              <img
+                className={css.castPhoto}
+                src={`https://image.tmdb.org/t/p/w200${member.profile_path}`}
+                alt={member.name}
+              />
+            ) : (
+              <div className={css.placeholder}>
+                <p>No foto yet...</p>
+              </div>
+            )}
             <p>{member.name}</p>
             <p>as {member.character}</p>
           </li>

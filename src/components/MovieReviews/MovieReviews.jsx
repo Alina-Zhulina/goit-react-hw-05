@@ -32,14 +32,18 @@ const MovieReviews = () => {
     <div>
       {loader && <Loader />}
       {error && <p>Something went wrong: {error.message}</p>}
-      <ul className={css.reviewList}>
-        {reviews.map((review) => (
-          <li key={review.id} className={css.reviewItem}>
-            <p className={css.reviewAuthor}>{review.author}</p>
-            <p className={css.reviewContent}>{review.content}</p>
-          </li>
-        ))}
-      </ul>
+      {reviews.length > 0 ? (
+        <ul className={css.reviewList}>
+          {reviews.map((review) => (
+            <li key={review.id} className={css.reviewItem}>
+              <p className={css.reviewAuthor}>{review.author}</p>
+              <p className={css.reviewContent}>{review.content}</p>
+            </li>
+          ))}
+        </ul>
+      ) : (
+        <p>No reviews available yet.</p>
+      )}
     </div>
   );
 };
