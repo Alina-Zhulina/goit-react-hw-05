@@ -1,11 +1,22 @@
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import css from "./GoBackBtn.module.css";
 
-export const GoBackBtn = ({ children, path }) => {
+const GoBackBtn = ({ path, children }) => {
+  const navigate = useNavigate();
+
+  const handleGoBack = () => {
+    if (path) {
+      navigate(path);
+    } else {
+      navigate("/movies");
+    }
+  };
+
   return (
-    <Link className={css.link} to={path}>
+    <button onClick={handleGoBack} className={css.link}>
       {children}
-    </Link>
+    </button>
   );
 };
+
 export default GoBackBtn;

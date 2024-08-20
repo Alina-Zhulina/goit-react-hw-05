@@ -39,3 +39,18 @@
   font-size: 16px;
   color: #333;
 }
+.placeholder {
+  width: 200px;
+  height: 300px;
+  background-color: #ccc;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.placeholder p {
+  margin: 0;
+  color: #555;
+  font-size: 16px;
+  text-align: center;
+}

@@ -1,59 +1,71 @@
-import { useState } from "react";
-
+import { useState, useEffect } from "react";
 import { FiSearch } from "react-icons/fi";
 import { searchMovies } from "../../service/moviesApi";
 import Loader from "../../components/Loader/Loader";
 import MoviesList from "../../components/MoviesList/MoviesList";
+import css from "./MoviesPage.module.css";
+import { useSearchParams } from "react-router-dom";
 
 const MoviesPage = () => {
-  const [query, setQuery] = useState("");
+  const [searchParams, setSearchParams] = useSearchParams();
+  const query = searchParams.get("query") || "";
+
+  const [inputValue, setInputValue] = useState(query);
+  const [searchQuery, setSearchQuery] = useState(query);
   const [results, setResults] = useState([]);
   const [loader, setLoader] = useState(false);
   const [error, setError] = useState("");
 
+  useEffect(() => {
+    if (searchQuery) {
+      const fetchMovies = async () => {
+        setLoader(true);
+        setError("");
+        try {
+          const searchResults = await searchMovies(searchQuery);
+          setResults(searchResults);
+        } catch (error) {
+          setError(error);
+        } finally {
+          setLoader(false);
+        }
+      };
+      fetchMovies();
+    }
+  }, [searchQuery]);
+
   const handleChange = (e) => {
-    setQuery(e.target.value);
+    setInputValue(e.target.value);
   };
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
-    if (query.trim() === "") return;
-    setLoader(true);
-    setError("");
-    try {
-      const searchResults = await searchMovies(query);
-      setResults(searchResults);
-    } catch (error) {
-      console.error(error);
-      setError("try again");
-    } finally {
-      setLoader(false);
+    if (inputValue.trim()) {
+      setSearchQuery(inputValue.trim());
+      setSearchParams({ query: inputValue.trim() });
     }
-    setQuery("");
+    setInputValue("");
   };
 
   return (
     <div>
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit} className={css.searchForm}>
         <input
           type="text"
-          value={query}
+          value={inputValue}
           onChange={handleChange}
           placeholder="Search film..."
+          className={css.searchInput}
         />
-        <button type="submit">
+        <button type="submit" className={css.searchButton}>
           <FiSearch size="16px" />
         </button>
       </form>
-
       {loader && <Loader />}
-      {error && <p>Something went wrong: {error.message}</p>}
+      {error && <p>{error}</p>}
       <div>
-        {results.length > 0 ? (
-          <MoviesList movies={results} />
-        ) : (
-          !loader && <p>No results...</p>
-        )}
+        {!results && <p className={css.noResults}>No results...</p>}
+        {results.length > 0 && <MoviesList movies={results} />}
       </div>
     </div>
   );

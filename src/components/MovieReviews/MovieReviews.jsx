@@ -1,5 +1,3 @@
-// src/pages/MovieReviews/MovieReviews.jsx
-
 import { useParams } from "react-router-dom";
 import { fetchMovieReviews } from "../../service/moviesApi";
 import { useEffect, useState } from "react";

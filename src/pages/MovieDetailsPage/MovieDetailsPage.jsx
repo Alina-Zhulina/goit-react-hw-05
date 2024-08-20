@@ -12,6 +12,7 @@ const MovieDetailsPage = () => {
   const [loader, setLoader] = useState(false);
   const [error, setError] = useState(null);
   const location = useLocation();
+
   const goBack = useRef(location?.state?.from ?? "/");
 
   useEffect(() => {

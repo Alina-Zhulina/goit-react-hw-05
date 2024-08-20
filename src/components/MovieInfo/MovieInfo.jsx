@@ -4,11 +4,17 @@ const MovieInfo = ({ title, poster_path, genres = [], overview }) => {
   return (
     <div className={css.wrapper}>
       <div className={css.poster}>
-        <img
-          className={css.img}
-          src={`https://image.tmdb.org/t/p/w200${poster_path}`}
-          alt={title}
-        />
+        {poster_path ? (
+          <img
+            className={css.img}
+            src={`https://image.tmdb.org/t/p/w200${poster_path}`}
+            alt={title}
+          />
+        ) : (
+          <div className={css.placeholder}>
+            <p>No foto yet...</p>
+          </div>
+        )}
       </div>
       <div className={css.details}>
         <h1 className={css.movieTitle}>{title}</h1>

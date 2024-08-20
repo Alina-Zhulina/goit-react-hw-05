@@ -36,7 +36,5 @@ export const searchMovies = async (query) => {
     `/search/movie?query=${encodeURIComponent(query)}`,
     options
   );
-  console.log(data.results);
-
   return data.results;
 };

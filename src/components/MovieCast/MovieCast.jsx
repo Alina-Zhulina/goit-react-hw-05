@@ -44,7 +44,7 @@ const MovieCast = () => {
               </div>
             )}
             <p>{member.name}</p>
-            <p>as {member.character}</p>
+            {member.character && <p>as {member.character}</p>}
           </li>
         ))}
       </ul>
